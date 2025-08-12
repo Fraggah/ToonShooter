@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://8qeumwddh2fy"]
+
+[ext_resource type="Texture2D" uid="uid://ttwsgmsodoav" path="res://Topdown+Assets/Topdown Assets/Sprites/Dead anim/death_0.png" id="1_4wjey"]
+[ext_resource type="Texture2D" uid="uid://dd0aq5umrxj22" path="res://Topdown+Assets/Topdown Assets/Sprites/Dead anim/death_1.png" id="2_njd2s"]
+[ext_resource type="Texture2D" uid="uid://bugmww0gwh2js" path="res://Topdown+Assets/Topdown Assets/Sprites/Dead anim/death_2.png" id="3_mx4h6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ovvh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4wjey")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_njd2s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mx4h6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mx4h6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_njd2s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_4wjey")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 20.0
+}]
+
+[node name="ExposionAnim" type="AnimatedSprite2D"]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_8ovvh")
+animation = &"idle"
+autoplay = "idle"

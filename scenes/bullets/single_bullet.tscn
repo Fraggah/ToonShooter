@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsx1mrqk48suq"]
+
+[ext_resource type="Script" uid="uid://cr37g4q0uep56" path="res://scenes/bullets/single_bullet.gd" id="1_571tv"]
+[ext_resource type="Texture2D" uid="uid://b6irhpunowl8a" path="res://Topdown+Assets/Topdown Assets/Sprites/Extras/bullet.png" id="1_yh6kw"]
+[ext_resource type="Texture2D" uid="uid://b0d6xe0sreis5" path="res://Topdown+Assets/Topdown Assets/Sprites/Shadow.png" id="3_db6ki"]
+[ext_resource type="AudioStream" uid="uid://d2usimra7pxry" path="res://Topdown+Assets/Topdown Assets/Sound/Explosion.wav" id="4_db6ki"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6kqte"]
+radius = 529.343
+
+[sub_resource type="Gradient" id="Gradient_db6ki"]
+offsets = PackedFloat32Array(0, 0.718615)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nlgci"]
+gradient = SubResource("Gradient_db6ki")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="SingleBullet" type="Node2D"]
+script = ExtResource("1_571tv")
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(0.07, 0.07)
+collision_layer = 0
+collision_mask = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("1_yh6kw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_6kqte")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+position = Vector2(0, 141)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("3_db6ki")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_db6ki")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.926843, 0.643486, 0, 1)
+energy = 0.5
+texture = SubResource("GradientTexture2D_nlgci")
+texture_scale = 5.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
